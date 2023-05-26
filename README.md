@@ -1,19 +1,18 @@
 # test-pages
 
-    your-repo/
-    ├── assets/
-    │   ├── swagger-ui/
-    │   │   ├── swagger-ui.css
-    │   │   ├── swagger-ui-bundle.js
-    │   │   ├── swagger-ui-standalone-preset.js
-    │   │   └── ... (other Swagger UI related assets)
-    │   └── custom/
-    │       ├── logo.png
-    │       └── custom.css
+    clp-docs/
+    ├── infrastructure/
+    │   └── terraform/
+    │       └── s3.tf
     ├── docs/
     ├── index.html
+    ├── using-apis/
+    │   └── helm/
+    │       └── helm.html
+    │       └── helm-swagger.json
     ├── scripts/
     │   └── fetch-swagger-json.sh
+    │   └── setup-directories.sh
     └── .github/
         └── workflows/
             └── publish.yml
