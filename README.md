@@ -14,17 +14,20 @@ Directory structure:
 
     clp-docs/
     ├── infrastructure/
-    │ └── terraform/
-    │ └── s3.tf
+    │   └── terraform/
+    │       └── s3.tf
     ├── docs/
     ├── index.html
     ├── using-apis/
-    │ └── helm/
-    │ └── helm.html
-    │ └── helm-swagger.json
+    │   └── helm/
+    │       └── index.html
+    │       └── helm-swagger.json
+    │   └── another-api/
+    │       └── index.html
+    │       └── another-api-swagger.json
     ├── scripts/
-    │ └── fetch-swagger-json.sh
-    │ └── setup-directories.sh
+    │   └── fetch-swagger-json.sh
+    │   └── generate-start-page.sh
     └── .github/
-    └── workflows/
-    └── publish.yml
+        └── workflows/
+            └── publish.yml
