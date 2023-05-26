@@ -30,7 +30,7 @@ for api_folder in "${docs_directory}"/*/; do
     api_name=$(basename "${api_folder}")
     relative_link=".${api_folder#"$docs_directory"}index.html"
     cat <<EOF >> "${index_file}"
-      <li><a href="${relative_link}">${api_name}</a></li>
+      <li><a href="${relative_link}"><h3>${api_name}</h3></a></li>
 EOF
   fi
 done
