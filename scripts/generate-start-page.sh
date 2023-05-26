@@ -14,24 +14,32 @@ touch "${index_file}"
 
 # Write the HTML header to the index.html file
 cat <<EOF > "${index_file}"
+<!DOCTYPE html>
 <html>
-<head>
-<title>Documented APIs</title>
-</head>
-<body>
-<h1>Documented APIs</h1>
+  <head>
+    <title>Documented APIs</title>
+  </head>
+  <body>
+    <h1>Documented APIs</h1>
+    <div id="using-apis">
 EOF
 
 # Loop through the subdirectories and generate list items with links
 for api_folder in "${docs_directory}"/*/; do
   if [[ -f "${api_folder}index.html" ]]; then
     api_name=$(basename "${api_folder}")
-    echo "<li><a href=\"${api_folder}index.html\">${api_name}</a></li>" >> "${index_file}"
+    relative_link=".${api_folder#"$docs_directory"}index.html"
+    cat <<EOF >> "${index_file}"
+      <li><a href="${relative_link}">${api_name}</a></li>
+EOF
   fi
 done
 
 # Write the HTML footer to the index.html file
-echo "</body>" >> "${index_file}"
-echo "</html>" >> "${index_file}"
+cat <<EOF >> "${index_file}"
+    </div>
+  </body>
+</html>
+EOF
 
 echo "index.html generated at ${index_file}"
