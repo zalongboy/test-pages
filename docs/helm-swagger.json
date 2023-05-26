@@ -1,0 +1,432 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "HealthController_healthCheck",
+        "summary": "Health check endpoint to verify the web server is running",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Health check"
+        ]
+      }
+    },
+    "/rates": {
+      "get": {
+        "operationId": "RateController_rates",
+        "parameters": [
+          {
+            "name": "loan_purpose",
+            "required": true,
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offer_source",
+            "required": true,
+            "in": "query",
+            "description": "[\"generic\",\"bucketed\"]",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "annual_income",
+            "required": false,
+            "in": "query",
+            "description": "Gross personal income in USD",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "annual_revenue",
+            "required": false,
+            "in": "query",
+            "description": "Gross business revenue in USD",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "credit_rating",
+            "required": false,
+            "in": "query",
+            "description": "Personal credit score",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "ids",
+            "required": false,
+            "in": "query",
+            "description": "Array of rate ids to request specific rates returned",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "loan_amount",
+            "required": false,
+            "in": "query",
+            "description": "Requested loan amount in USD",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "time_in_business",
+            "required": false,
+            "in": "query",
+            "description": "Months",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "vertical",
+            "required": false,
+            "in": "query",
+            "description": "[\"auto\", \"business\", \"personal\"]",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "zipcode",
+            "required": false,
+            "in": "query",
+            "description": "5-digit US",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RateResponseDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Rates"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Helm",
+    "description": "An API for retrieving partner rates <br /><br /><b>Base URLs:</b> <br /><b>QA:</b> https://helm.qa.bankrate.com <br /><b>Production:</b> https://helm.bankrate.com",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "Amount": {
+        "type": "object",
+        "properties": {
+          "max": {
+            "type": "number"
+          },
+          "min": {
+            "type": "number"
+          },
+          "override": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "max",
+          "min"
+        ]
+      },
+      "MinMax": {
+        "type": "object",
+        "properties": {
+          "max": {
+            "type": "number"
+          },
+          "min": {
+            "type": "number"
+          }
+        }
+      },
+      "Apr": {
+        "type": "object",
+        "properties": {
+          "fixed": {
+            "$ref": "#/components/schemas/MinMax"
+          },
+          "override": {
+            "type": "string"
+          },
+          "subtext": {
+            "type": "string"
+          },
+          "variable": {
+            "$ref": "#/components/schemas/MinMax"
+          }
+        }
+      },
+      "Business": {
+        "type": "object",
+        "properties": {
+          "annualRevenue": {
+            "$ref": "#/components/schemas/MinMax"
+          },
+          "fundingSpeed": {
+            "type": "number"
+          },
+          "personalGuarantee": {
+            "type": "boolean"
+          },
+          "timeInBusiness": {
+            "$ref": "#/components/schemas/MinMax"
+          }
+        }
+      },
+      "Destination": {
+        "type": "object",
+        "properties": {
+          "lenderUrl": {
+            "type": "string"
+          },
+          "subtext": {
+            "type": "string"
+          },
+          "trackingParameter": {
+            "type": "string"
+          },
+          "trackingUrl": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "deprecated": true
+          }
+        }
+      },
+      "Editorial": {
+        "type": "object",
+        "properties": {
+          "cons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "consumerInfo": {
+            "type": "string"
+          },
+          "eligibilityRequirements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "feeTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fundingText": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "perks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pros": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "superlative": {
+            "type": "string"
+          }
+        }
+      },
+      "Fees": {
+        "type": "object",
+        "properties": {
+          "settlement": {
+            "$ref": "#/components/schemas/MinMax"
+          }
+        }
+      },
+      "Review": {
+        "type": "object",
+        "properties": {
+          "details": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "Lender": {
+        "type": "object",
+        "properties": {
+          "logo": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "offerSource": {
+            "type": "string",
+            "description": "\"generic\" or \"bucketed\""
+          },
+          "review": {
+            "$ref": "#/components/schemas/Review"
+          },
+          "vertical": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "offerSource",
+          "vertical",
+          "uuid"
+        ]
+      },
+      "MinimumCreditRequired": {
+        "type": "object",
+        "properties": {
+          "business": {
+            "type": "number"
+          },
+          "personal": {
+            "type": "number"
+          }
+        }
+      },
+      "Rate": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "apr": {
+            "$ref": "#/components/schemas/Apr"
+          },
+          "business": {
+            "$ref": "#/components/schemas/Business"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/Destination"
+          },
+          "editorial": {
+            "$ref": "#/components/schemas/Editorial"
+          },
+          "fees": {
+            "$ref": "#/components/schemas/Fees"
+          },
+          "id": {
+            "type": "number"
+          },
+          "income": {
+            "$ref": "#/components/schemas/MinMax"
+          },
+          "lender": {
+            "$ref": "#/components/schemas/Lender"
+          },
+          "loanPurpose": {
+            "type": "string"
+          },
+          "marketingDetails": {
+            "description": "Array of marketing bullet points",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "minimumCreditRequired": {
+            "$ref": "#/components/schemas/MinimumCreditRequired"
+          },
+          "monetized": {
+            "type": "boolean"
+          },
+          "productType": {
+            "type": "string"
+          },
+          "rank": {
+            "type": "number"
+          },
+          "term": {
+            "$ref": "#/components/schemas/MinMax"
+          },
+          "termsAndConditions": {
+            "type": "string",
+            "description": "Legal disclosures with HTML tags."
+          }
+        },
+        "required": [
+          "amount",
+          "id",
+          "lender",
+          "loanPurpose",
+          "monetized",
+          "productType"
+        ]
+      },
+      "RateResponseDTO": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Array of rates or empty array if no rates are found.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Rate"
+            }
+          }
+        },
+        "required": [
+          "data"
+        ]
+      }
+    }
+  }
+}
