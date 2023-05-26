@@ -1,23 +1,8 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <title>Swagger UI</title>
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist/swagger-ui.css" />
-  </head>
-  <body>
-    <div id="swagger-ui"></div>
-    <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js"></script>
-    <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-standalone-preset.js"></script>
-    <script>
-      window.onload = function() {
-        const ui = SwaggerUIBundle({
-          url: "./helm-swagger.json",
-          dom_id: "#swagger-ui",
-          presets: [SwaggerUIBundle.presets.apis],
-          plugins: [SwaggerUIBundle.plugins.DownloadUrl],
-          layout: "BaseLayout",
-        });
-      };
-    </script>
-  </body>
+<head>
+<title>Documented APIs</title>
+</head>
+<body>
+<li><a href="../docs/helm//index.html">helm</a></li>
+</body>
 </html>
