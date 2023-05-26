@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Specify the directory you want to generate the index.html file for
-docs_directory="../docs"
+docs_directory="./docs"
 index_file="${docs_directory}/index.html"
 
 # Remove the existing index.html file if it exists
@@ -19,13 +19,14 @@ cat <<EOF > "${index_file}"
 <title>Documented APIs</title>
 </head>
 <body>
+<h1>Documented APIs</h1>
 EOF
 
 # Loop through the subdirectories and generate list items with links
 for api_folder in "${docs_directory}"/*/; do
-  if [[ -f "${api_folder}/index.html" ]]; then
+  if [[ -f "${api_folder}index.html" ]]; then
     api_name=$(basename "${api_folder}")
-    echo "<li><a href=\"${api_folder}/index.html\">${api_name}</a></li>" >> "${index_file}"
+    echo "<li><a href=\"${api_folder}index.html\">${api_name}</a></li>" >> "${index_file}"
   fi
 done
 
