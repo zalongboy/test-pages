@@ -3,7 +3,7 @@
 ## Proposed approach
 
 1. Nest API application repos write the swagger.json files to an S3 bucket
-2. New cl-docs repo will:
+2. New clp-docs repo will:
 
    - Fetch all swagger.json files in this S3 bucketed tagged latest
    - Scripts set up basic swagger templates and folder structure
