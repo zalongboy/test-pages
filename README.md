@@ -4,7 +4,7 @@
 
 Deployed url: https://zalongboy.github.io/test-pages/
 
-1. Nest API application repos write the swagger.json files to an S3 bucket
+1. Nest API application repos write the swagger.json files to an S3 bucket (existing pattern)
 2. New clp-docs repo will:
 
    - Fetch all swagger.json files in this S3 bucketed in application subdirectories, tagged latest
