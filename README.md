@@ -30,4 +30,4 @@ Directory structure:
     │   └── generate-start-page.sh
     └── .github/
         └── workflows/
-            └── publish.yml
+            └── deploy-pages.yml
