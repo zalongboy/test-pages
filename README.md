@@ -2,15 +2,13 @@
 
 ## Proposed approach
 
-Deployed url: https://zalongboy.github.io/test-pages/
-
-1. Nest API application repos write the swagger.json files to an S3 bucket (existing pattern)
+1. Nest API application repos write the swagger.json files to an S3 bucket
 2. New clp-docs repo will:
 
-   - Fetch all swagger.json files in this S3 bucketed in application subdirectories, tagged latest
+   - Fetch all swagger.json files in this S3 bucketed tagged latest
    - Scripts set up basic swagger templates and folder structure
-   - Host on Github pages, deploy with GitHub Actions
-   - Trigger deploy manually with GitHub actions ad hoc OR maybe application repos can make request to GHA API in deploy workflow
+   - Host on Github pages
+   - Trigger deploy manually with GitHub actions ad hoc OR application repos can make request to GHA API in deploy workflow
 
 Directory structure:
 
@@ -28,7 +26,7 @@ Directory structure:
     │       └── index.html
     │       └── another-api-swagger.json
     ├── scripts/
-    │   └── generate-swagger-template.sh
+    │   └── fetch-swagger-json.sh
     │   └── generate-start-page.sh
     └── .github/
         └── workflows/
